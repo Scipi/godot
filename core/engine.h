@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -29,14 +30,14 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "ustring.h"
 #include "list.h"
-#include "vector.h"
 #include "os/main_loop.h"
+#include "ustring.h"
+#include "vector.h"
 
 class Engine {
 
-friend class Main;
+	friend class Main;
 
 	String _custom_level;
 	uint64_t frames_drawn;
@@ -52,8 +53,8 @@ friend class Main;
 	bool _in_fixed;
 
 	static Engine *singleton;
-public:
 
+public:
 	static Engine *get_singleton();
 
 	virtual void set_iterations_per_second(int p_ips);

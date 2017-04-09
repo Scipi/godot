@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -33,11 +34,10 @@ RID Space2D::get_rid() const {
 	return space;
 }
 
-
 void Space2D::set_active(bool p_active) {
 
-	active=p_active;
-	Physics2DServer::get_singleton()->space_set_active(space,active);
+	active = p_active;
+	Physics2DServer::get_singleton()->space_set_active(space, active);
 }
 
 bool Space2D::is_active() const {
@@ -45,24 +45,21 @@ bool Space2D::is_active() const {
 	return active;
 }
 
-
 void Space2D::_bind_methods() {
 
-	ClassDB::bind_method(D_METHOD("set_active","active"),&Space2D::set_active);
-	ClassDB::bind_method(D_METHOD("is_active"),&Space2D::is_active);
+	ClassDB::bind_method(D_METHOD("set_active", "active"), &Space2D::set_active);
+	ClassDB::bind_method(D_METHOD("is_active"), &Space2D::is_active);
 
-	ADD_PROPERTY( PropertyInfo(Variant::BOOL,"active"),"set_active","is_active") ;
-
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "active"), "set_active", "is_active");
 }
 
 Space2D::Space2D() {
 
-	active=false;
-	space=Physics2DServer::get_singleton()->space_create();
+	active = false;
+	space = Physics2DServer::get_singleton()->space_create();
 }
 
 Space2D::~Space2D() {
 
 	Physics2DServer::get_singleton()->free(space);
 }
-

@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -30,7 +31,7 @@
 #import "gl_view.h"
 
 #include "os_iphone.h"
-#include "core/globals.h"
+#include "core/global_config.h"
 #include "main/main.h"
 
 #ifdef MODULE_FACEBOOKSCORER_IOS_ENABLED
@@ -51,10 +52,6 @@
 #define kFilteringFactor                        0.1
 #define kRenderingFrequency						60
 #define kAccelerometerFrequency         100.0 // Hz
-
-#ifdef APPIRATER_ENABLED
-#import "Appirater.h"
-#endif
 
 Error _shell_open(String);
 void _set_keep_screen_on(bool p_enabled);
@@ -188,11 +185,6 @@ static int frame_count = 0;
 		Main::start();
 		++frame_count;
 
-		#ifdef APPIRATER_ENABLED
-		int aid = GlobalConfig::get_singleton()->get("ios/app_id");
-		[Appirater appLaunched:YES app_id:aid];
-		#endif
-
 	}; break; // no fallthrough
 
 	default: {
@@ -308,8 +300,8 @@ static int frame_count = 0;
 	if (!motionInitialised) {
 		motionManager = [[CMMotionManager alloc] init];
 		if (motionManager.deviceMotionAvailable) {
-      motionManager.deviceMotionUpdateInterval = 1.0/70.0;
-      [motionManager startDeviceMotionUpdates];			
+			motionManager.deviceMotionUpdateInterval = 1.0/70.0;
+                        [motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXMagneticNorthZVertical];
 			motionInitialised = YES;
 		};
 	};

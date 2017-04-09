@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -35,20 +36,17 @@
 
 class AudioDriverJavaScript : public AudioDriver {
 public:
-
-	virtual const char* get_name() const;
+	virtual const char *get_name() const;
 
 	virtual Error init();
 	virtual void start();
-	virtual int get_mix_rate() const ;
+	virtual int get_mix_rate() const;
 	virtual SpeakerMode get_speaker_mode() const;
 	virtual void lock();
 	virtual void unlock();
 	virtual void finish();
 
-
 	AudioDriverJavaScript();
 };
-
 
 #endif

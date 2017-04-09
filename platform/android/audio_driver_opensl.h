@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -29,8 +30,8 @@
 #ifndef AUDIO_DRIVER_OPENSL_H
 #define AUDIO_DRIVER_OPENSL_H
 
-#include "servers/audio_server.h"
 #include "os/mutex.h"
+#include "servers/audio_server.h"
 
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
@@ -42,17 +43,15 @@ class AudioDriverOpenSL : public AudioDriver {
 
 	enum {
 
-		BUFFER_COUNT=2
+		BUFFER_COUNT = 2
 	};
 
 	bool pause;
-
 
 	uint32_t buffer_size;
 	int16_t *buffers[BUFFER_COUNT];
 	int32_t *mixdown_buffer;
 	int last_free;
-
 
 	SLPlayItf playItf;
 	SLObjectItf sl;
@@ -67,31 +66,31 @@ class AudioDriverOpenSL : public AudioDriver {
 	SLDataLocator_OutputMix locator_outputmix;
 	SLBufferQueueState state;
 
-	static AudioDriverOpenSL* s_ad;
+	static AudioDriverOpenSL *s_ad;
 
 	void _buffer_callback(
-	    SLAndroidSimpleBufferQueueItf queueItf
-	 /*   SLuint32 eventFlags,
+			SLAndroidSimpleBufferQueueItf queueItf
+			/*   SLuint32 eventFlags,
 	    const void * pBuffer,
 	    SLuint32 bufferSize,
 	    SLuint32 dataUsed*/);
 
 	static void _buffer_callbacks(
-	    SLAndroidSimpleBufferQueueItf queueItf,
-	    /*SLuint32 eventFlags,
+			SLAndroidSimpleBufferQueueItf queueItf,
+			/*SLuint32 eventFlags,
 	    const void * pBuffer,
 	    SLuint32 bufferSize,
 	    SLuint32 dataUsed,*/
-	    void *pContext);
-public:
+			void *pContext);
 
+public:
 	void set_singleton();
 
-	virtual const char* get_name() const;
+	virtual const char *get_name() const;
 
 	virtual Error init();
 	virtual void start();
-	virtual int get_mix_rate() const ;
+	virtual int get_mix_rate() const;
 	virtual SpeakerMode get_speaker_mode() const;
 	virtual void lock();
 	virtual void unlock();
@@ -103,4 +102,3 @@ public:
 };
 
 #endif // AUDIO_DRIVER_ANDROID_H
-

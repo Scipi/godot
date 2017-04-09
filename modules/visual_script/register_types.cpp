@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -28,23 +29,21 @@
 /*************************************************************************/
 #include "register_types.h"
 
-#include "visual_script.h"
-#include "visual_script_editor.h"
 #include "io/resource_loader.h"
-#include "visual_script_nodes.h"
-#include "visual_script_func_nodes.h"
+#include "visual_script.h"
 #include "visual_script_builtin_funcs.h"
-#include "visual_script_flow_control.h"
-#include "visual_script_yield_nodes.h"
+#include "visual_script_editor.h"
 #include "visual_script_expression.h"
+#include "visual_script_flow_control.h"
+#include "visual_script_func_nodes.h"
+#include "visual_script_nodes.h"
+#include "visual_script_yield_nodes.h"
 
-
-VisualScriptLanguage *visual_script_language=NULL;
-
+VisualScriptLanguage *visual_script_language = NULL;
 
 void register_visual_script_types() {
 
-	visual_script_language=memnew( VisualScriptLanguage );
+	visual_script_language = memnew(VisualScriptLanguage);
 	//script_language_gd->init();
 	ScriptServer::register_language(visual_script_language);
 
@@ -78,7 +77,6 @@ void register_visual_script_types() {
 	ClassDB::register_class<VisualScriptPreload>();
 	ClassDB::register_class<VisualScriptTypeCast>();
 
-
 	ClassDB::register_class<VisualScriptFunctionCall>();
 	ClassDB::register_class<VisualScriptPropertySet>();
 	ClassDB::register_class<VisualScriptPropertyGet>();
@@ -91,13 +89,12 @@ void register_visual_script_types() {
 	ClassDB::register_class<VisualScriptIterator>();
 	ClassDB::register_class<VisualScriptSequence>();
 	ClassDB::register_class<VisualScriptInputFilter>();
-	ClassDB::register_class<VisualScriptSwitch	>();
+	ClassDB::register_class<VisualScriptSwitch>();
 
 	ClassDB::register_class<VisualScriptYield>();
 	ClassDB::register_class<VisualScriptYieldSignal>();
 
 	ClassDB::register_class<VisualScriptBuiltinFunc>();
-
 
 	ClassDB::register_class<VisualScriptExpression>();
 
@@ -111,12 +108,9 @@ void register_visual_script_types() {
 #ifdef TOOLS_ENABLED
 	VisualScriptEditor::register_editor();
 #endif
-
-
 }
 
 void unregister_visual_script_types() {
-
 
 	unregister_visual_script_nodes();
 
@@ -126,6 +120,5 @@ void unregister_visual_script_types() {
 	VisualScriptEditor::free_clipboard();
 #endif
 	if (visual_script_language)
-		memdelete( visual_script_language );
-
+		memdelete(visual_script_language);
 }

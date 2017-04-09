@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -35,7 +36,8 @@
 */
 class TextureRect : public Control {
 
-	GDCLASS(TextureRect,Control);
+	GDCLASS(TextureRect, Control);
+
 public:
 	enum StretchMode {
 		STRETCH_SCALE_ON_EXPAND, //default, for backwards compatibility
@@ -47,21 +49,20 @@ public:
 		STRETCH_KEEP_ASPECT_CENTERED,
 		STRETCH_KEEP_ASPECT_COVERED,
 	};
+
 private:
 	bool expand;
 	Ref<Texture> texture;
 	StretchMode stretch_mode;
-protected:
 
+protected:
 	void _notification(int p_what);
 	virtual Size2 get_minimum_size() const;
 	static void _bind_methods();
 
 public:
-
-	void set_texture(const Ref<Texture>& p_tex);
+	void set_texture(const Ref<Texture> &p_tex);
 	Ref<Texture> get_texture() const;
-
 
 	void set_expand(bool p_expand);
 	bool has_expand() const;
@@ -71,8 +72,7 @@ public:
 
 	TextureRect();
 	~TextureRect();
-
 };
 
-VARIANT_ENUM_CAST( TextureRect::StretchMode );
+VARIANT_ENUM_CAST(TextureRect::StretchMode);
 #endif // TEXTURE_FRAME_H

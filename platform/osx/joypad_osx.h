@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -34,9 +35,9 @@
 #else
 #include <Kernel/IOKit/hidsystem/IOHIDUsageTables.h>
 #endif
-#include <IOKit/hid/IOHIDLib.h>
 #include <ForceFeedback/ForceFeedback.h>
 #include <ForceFeedback/ForceFeedbackConstants.h>
+#include <IOKit/hid/IOHIDLib.h>
 
 #include "main/input_default.h"
 
@@ -63,7 +64,7 @@ struct joypad {
 
 	int id;
 
-	io_service_t ffservice;     /* Interface for force feedback, 0 = no ff */
+	io_service_t ffservice; /* Interface for force feedback, 0 = no ff */
 	FFCONSTANTFORCE ff_constant_force;
 	FFDeviceObjectReference ff_device;
 	FFEffectObjectReference ff_object;
@@ -95,14 +96,11 @@ private:
 	InputDefault *input;
 	IOHIDManagerRef hid_manager;
 
-	bool attached_devices[JOYPADS_MAX];
 	Vector<joypad> device_list;
 
 	bool have_device(IOHIDDeviceRef p_device) const;
 	bool configure_joypad(IOHIDDeviceRef p_device_ref, joypad *p_joy);
 
-
-	int get_free_joy_id();
 	int get_joy_index(int p_id) const;
 
 	void poll_joypads() const;
@@ -113,7 +111,7 @@ private:
 	void joypad_vibration_stop(int p_id, uint64_t p_timestamp);
 
 public:
-	uint32_t process_joypads(uint32_t p_last_id);
+	void process_joypads();
 
 	void _device_added(IOReturn p_res, IOHIDDeviceRef p_device);
 	void _device_removed(int p_id);

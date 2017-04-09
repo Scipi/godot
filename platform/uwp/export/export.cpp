@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -66,21 +67,21 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *************************************************************************/
 
 #if 0
-#include "version.h"
 #include "export.h"
-#include "object.h"
-#include "tools/editor/editor_import_export.h"
-#include "tools/editor/editor_node.h"
-#include "platform/uwp/logo.h"
-#include "os/file_access.h"
-#include "io/zip.h"
-#include "io/unzip.h"
-#include "io/zip_io.h"
-#include "io/sha256.h"
-#include "io/base64.h"
 #include "bind/core_bind.h"
-#include "globals.h"
+#include "editor/editor_import_export.h"
+#include "editor/editor_node.h"
+#include "global_config.h"
+#include "io/base64.h"
 #include "io/marshalls.h"
+#include "io/sha256.h"
+#include "io/unzip.h"
+#include "io/zip.h"
+#include "io/zip_io.h"
+#include "object.h"
+#include "os/file_access.h"
+#include "platform/uwp/logo.h"
+#include "version.h"
 
 #include <zlib.h>
 
@@ -120,14 +121,14 @@ static const char* uwp_device_capabilites[] = {
 };
 
 #ifdef OPENSSL_ENABLED
-#include <openssl/bio.h>
 #include <openssl/asn1.h>
-#include <openssl/pkcs7.h>
-#include <openssl/pkcs12.h>
-#include <openssl/err.h>
 #include <openssl/asn1t.h>
-#include <openssl/x509.h>
+#include <openssl/bio.h>
+#include <openssl/err.h>
 #include <openssl/ossl_typ.h>
+#include <openssl/pkcs12.h>
+#include <openssl/pkcs7.h>
+#include <openssl/x509.h>
 
 namespace asn1 {
 	// https://msdn.microsoft.com/en-us/gg463180.aspx
@@ -1032,7 +1033,7 @@ void AppxPackager::finish() {
 		Error err = read_cert_file(certificate_path, certificate_pass, &cert_file);
 
 		if (err != OK) {
-			EditorNode::add_io_error(TTR("Couldn't read the certficate file. Are the path and password both correct?"));
+			EditorNode::add_io_error(TTR("Couldn't read the certificate file. Are the path and password both correct?"));
 			package->close();
 			memdelete(package);
 			package = NULL;
@@ -2391,4 +2392,3 @@ void register_uwp_exporter() {
 	EditorImportExport::get_singleton()->add_export_platform(exporter);
 #endif
 }
-

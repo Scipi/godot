@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -33,8 +34,7 @@
 
 class RayCast2D : public Node2D {
 
-	GDCLASS(RayCast2D,Node2D);
-
+	GDCLASS(RayCast2D, Node2D);
 
 	bool enabled;
 	bool collided;
@@ -47,19 +47,18 @@ class RayCast2D : public Node2D {
 	uint32_t type_mask;
 	bool exclude_parent_body;
 
-
 	Vector2 cast_to;
-protected:
 
+protected:
 	void _notification(int p_what);
 	void _update_raycast_state();
 	static void _bind_methods();
-public:
 
+public:
 	void set_enabled(bool p_enabled);
 	bool is_enabled() const;
 
-	void set_cast_to(const Vector2& p_point);
+	void set_cast_to(const Vector2 &p_point);
 	Vector2 get_cast_to() const;
 
 	void set_layer_mask(uint32_t p_mask);
@@ -79,10 +78,10 @@ public:
 	Vector2 get_collision_point() const;
 	Vector2 get_collision_normal() const;
 
-	void add_exception_rid(const RID& p_rid);
-	void add_exception(const Object* p_object);
-	void remove_exception_rid(const RID& p_rid);
-	void remove_exception(const Object* p_object);
+	void add_exception_rid(const RID &p_rid);
+	void add_exception(const Object *p_object);
+	void remove_exception_rid(const RID &p_rid);
+	void remove_exception(const Object *p_object);
 	void clear_exceptions();
 
 	RayCast2D();

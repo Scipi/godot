@@ -51,7 +51,7 @@ def configure(env):
 
     elif (env["target"] == "debug"):
 
-        env.Append(CCFLAGS=['-g3', '-Wall', '-DDEBUG_ENABLED', '-DDEBUG_MEMORY_ENABLED'])
+        env.Append(CCFLAGS=['-g3', '-DDEBUG_ENABLED', '-DDEBUG_MEMORY_ENABLED'])
 
     if (not os.environ.has_key("OSXCROSS_ROOT")):
         # regular native build
@@ -100,3 +100,4 @@ def configure(env):
     #env.Append( BUILDERS = { 'HLSL9' : env.Builder(action = methods.build_hlsl_dx9_headers, suffix = 'hlsl.h',src_suffix = '.hlsl') } )
 
     env["x86_libtheora_opt_gcc"] = True
+    

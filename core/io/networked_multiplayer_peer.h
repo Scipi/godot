@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -33,15 +34,15 @@
 
 class NetworkedMultiplayerPeer : public PacketPeer {
 
-	GDCLASS(NetworkedMultiplayerPeer,PacketPeer);
+	GDCLASS(NetworkedMultiplayerPeer, PacketPeer);
 
 protected:
 	static void _bind_methods();
-public:
 
+public:
 	enum {
-		TARGET_PEER_BROADCAST=0,
-		TARGET_PEER_SERVER=1
+		TARGET_PEER_BROADCAST = 0,
+		TARGET_PEER_SERVER = 1
 	};
 	enum TransferMode {
 		TRANSFER_MODE_UNRELIABLE,
@@ -55,28 +56,26 @@ public:
 		CONNECTION_CONNECTED,
 	};
 
+	virtual void set_transfer_mode(TransferMode p_mode) = 0;
+	virtual void set_target_peer(int p_peer_id) = 0;
 
-	virtual void set_transfer_mode(TransferMode p_mode)=0;
-	virtual void set_target_peer(int p_peer_id)=0;
+	virtual int get_packet_peer() const = 0;
 
-	virtual int get_packet_peer() const=0;
+	virtual bool is_server() const = 0;
 
-	virtual bool is_server() const=0;
+	virtual void poll() = 0;
 
-	virtual void poll()=0;
+	virtual int get_unique_id() const = 0;
 
-	virtual int get_unique_id() const=0;
+	virtual void set_refuse_new_connections(bool p_enable) = 0;
+	virtual bool is_refusing_new_connections() const = 0;
 
-	virtual void set_refuse_new_connections(bool p_enable)=0;
-	virtual bool is_refusing_new_connections() const=0;
-
-
-	virtual ConnectionStatus get_connection_status() const=0;
+	virtual ConnectionStatus get_connection_status() const = 0;
 
 	NetworkedMultiplayerPeer();
 };
 
-VARIANT_ENUM_CAST( NetworkedMultiplayerPeer::TransferMode )
-VARIANT_ENUM_CAST( NetworkedMultiplayerPeer::ConnectionStatus )
+VARIANT_ENUM_CAST(NetworkedMultiplayerPeer::TransferMode)
+VARIANT_ENUM_CAST(NetworkedMultiplayerPeer::ConnectionStatus)
 
 #endif // NetworkedMultiplayerPeer_H

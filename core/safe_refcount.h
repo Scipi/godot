@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -35,34 +36,30 @@
 #include "platform_config.h"
 #include "typedefs.h"
 
-
-uint32_t atomic_conditional_increment( register uint32_t * counter );
-uint32_t atomic_decrement( register uint32_t * pw );
-uint32_t atomic_increment( register uint32_t * pw );
-
-
+uint32_t atomic_conditional_increment(register uint32_t *counter);
+uint32_t atomic_decrement(register uint32_t *pw);
+uint32_t atomic_increment(register uint32_t *pw);
 
 struct SafeRefCount {
 
-  uint32_t count;
+	uint32_t count;
 
 public:
-
 	// destroy() is called when weak_count_ drops to zero.
 
-	bool ref() {  //true on success
+	bool ref() { //true on success
 
-		return atomic_conditional_increment( &count ) != 0;
+		return atomic_conditional_increment(&count) != 0;
 	}
 
-	uint32_t refval() {  //true on success
+	uint32_t refval() { //true on success
 
-		return atomic_conditional_increment( &count );
+		return atomic_conditional_increment(&count);
 	}
 
 	bool unref() { // true if must be disposed of
 
-		if( atomic_decrement ( &count ) == 0 ) {
+		if (atomic_decrement(&count) == 0) {
 			return true;
 		}
 
@@ -74,13 +71,10 @@ public:
 		return count;
 	}
 
-	void init(uint32_t p_value=1) {
+	void init(uint32_t p_value = 1) {
 
-		count=p_value;
+		count = p_value;
 	}
-
 };
-
-
 
 #endif

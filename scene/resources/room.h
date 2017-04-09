@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -29,38 +30,31 @@
 #ifndef ROOM_BOUNDS_H
 #define ROOM_BOUNDS_H
 
-#include "resource.h"
 #include "bsp_tree.h"
+#include "resource.h"
 /**
 	@author Juan Linietsky <reduzio@gmail.com>
 */
 
 class RoomBounds : public Resource {
 
-	GDCLASS( RoomBounds, Resource );
+	GDCLASS(RoomBounds, Resource);
 	RES_BASE_EXTENSION("room");
 
 	RID area;
 	PoolVector<Face3> geometry_hint;
 
-
 protected:
-
 	static void _bind_methods();
 
 public:
-
 	virtual RID get_rid() const;
 
-
-	void set_geometry_hint(const PoolVector<Face3>& geometry_hint);
+	void set_geometry_hint(const PoolVector<Face3> &geometry_hint);
 	PoolVector<Face3> get_geometry_hint() const;
 
 	RoomBounds();
 	~RoomBounds();
-
 };
-
-
 
 #endif // ROOM_H

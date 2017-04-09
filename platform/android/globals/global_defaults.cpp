@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -27,12 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 #include "global_defaults.h"
-#include "globals.h"
-
+#include "global_config.h"
 
 void register_android_global_defaults() {
 
-/*	GLOBAL_DEF("rasterizer.Android/use_fragment_lighting",false);
+	/*	GLOBAL_DEF("rasterizer.Android/use_fragment_lighting",false);
 	GLOBAL_DEF("rasterizer.Android/fp16_framebuffer",false);
 	GLOBAL_DEF("display.Android/driver","GLES2");
 	//GLOBAL_DEF("rasterizer.Android/trilinear_mipmap_filter",false);

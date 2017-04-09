@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -1119,6 +1120,8 @@ void OS_OSX::initialize(const VideoMode& p_desired,int p_video_driver,int p_audi
 	input = memnew( InputDefault );
 	joypad_osx = memnew( JoypadOSX );
 
+	power_manager = memnew( power_osx );
+
 	_ensure_data_dir();
 
 	NSArray *screenArray = [NSScreen screens];
@@ -1696,7 +1699,6 @@ void OS_OSX::process_events() {
 void OS_OSX::push_input(const InputEvent& p_event) {
 
 	InputEvent ev=p_event;
-	ev.ID=last_id++;
 	//print_line("EV: "+String(ev));
 	input->parse_input_event(ev);
 }
@@ -1723,7 +1725,7 @@ void OS_OSX::run() {
 	while (!force_quit) {
 
 		process_events(); // get rid of pending events
-		last_id = joypad_osx->process_joypads(last_id);
+		joypad_osx->process_joypads();
 		if (Main::iteration()==true)
 			break;
 	};
@@ -1758,8 +1760,21 @@ OS::MouseMode OS_OSX::get_mouse_mode() const {
     return mouse_mode;
 }
 
+
 String OS_OSX::get_joy_guid(int p_device) const {
 	return input->get_joy_guid_remapped(p_device);
+}
+
+PowerState OS_OSX::get_power_state() {
+	return power_manager->get_power_state();
+}
+
+int OS_OSX::get_power_seconds_left() {
+	return power_manager->get_power_seconds_left();
+}
+
+int OS_OSX::get_power_percent_left() {
+	return power_manager->get_power_percent_left();
 }
 
 OS_OSX* OS_OSX::singleton=NULL;
@@ -1807,7 +1822,6 @@ OS_OSX::OS_OSX() {
 	[NSApp setDelegate:delegate];
 
 
-	last_id=1;
 	cursor_shape=CURSOR_ARROW;
 
 	current_screen = 0;

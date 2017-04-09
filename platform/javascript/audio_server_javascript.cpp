@@ -6,6 +6,7 @@
 /*                    http://www.godotengine.org                         */
 /*************************************************************************/
 /* Copyright (c) 2007-2017 Juan Linietsky, Ariel Manzur.                 */
+/* Copyright (c) 2014-2017 Godot Engine contributors (cf. AUTHORS.md)    */
 /*                                                                       */
 /* Permission is hereby granted, free of charge, to any person obtaining */
 /* a copy of this software and associated documentation files (the       */
@@ -27,7 +28,7 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                */
 /*************************************************************************/
 #include "audio_server_javascript.h"
-
+#if 0
 #include "emscripten.h"
 
 AudioMixer *AudioServerJavascript::get_mixer() {
@@ -767,7 +768,7 @@ void AudioServerJavascript::driver_process_chunk(int p_frames) {
 
 		int32_t stream_vol_scale=(stream_volume*stream_volume_scale*E->get()->volume_scale)*(1<<STREAM_SCALE_BITS);
 
-#define STRSCALE(m_val)	((((m_val>>STREAM_SCALE_BITS)*stream_vol_scale)>>8)/8388608.0)
+#define STRSCALE(m_val) ((((m_val >> STREAM_SCALE_BITS) * stream_vol_scale) >> 8) / 8388608.0)
 		switch(channels) {
 			case 1: {
 
@@ -847,3 +848,4 @@ AudioServerJavascript::AudioServerJavascript() {
 	stream_volume_scale=1.0;
 
 }
+#endif

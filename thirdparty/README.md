@@ -16,13 +16,18 @@ TODO.
 
 Files extracted from upstream source:
 
-- all .c files in the main directory
-- the include/enet/ folder as enet/
+- all .c files in the main directory (except unix.c win32.c)
+- the include/enet/ folder as enet/ (except unix.h win32.h)
 - LICENSE file
 
-Important: Some files have been modified by Godot developers so that they work
-for all platforms (especially UWP). Check the diff with the 1.3.13 tarball
-before the next update.
+Important: enet.h, host.c, protocol.c have been slightly modified
+to be usable by godot socket implementation and allow IPv6.
+Two files (godot.cpp and enet/godot.h) have been added to provide
+enet socket implementation using Godot classes.
+It is still possible to build against a system wide ENet but doing so
+will limit it's functionality to IPv4 only.
+Check the diff of enet.h, protocol.c, and host.c with the 1.3.13
+tarball before the next update.
 
 
 ## fonts
@@ -124,15 +129,15 @@ Files extracted from upstream source:
 ## libwebp
 
 - Upstream: https://chromium.googlesource.com/webm/libwebp/
-- Version: 0.5.2
+- Version: 0.6.0
 - License: BSD-3-Clause
 
 Files extracted from upstream source:
 
-- `src/*` except from: .am and .in, files, extras/, `webp/extras.h`
+- `src/*` except from: .am, .rc and .in files
 - AUTHORS, COPYING, PATENTS
 
-Important: The files `utils/bit_reader.{c,h}` have Godot-made
+Important: The files `utils/bit_reader_utils.{c,h}` have Godot-made
 changes to ensure they build for Javascript/HTML5. Those
 changes are marked with `// -- GODOT --` comments.
 
